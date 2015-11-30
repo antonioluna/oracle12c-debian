@@ -144,8 +144,5 @@ source ~/.bashrc
 ### Launcher
 
 sudo ln -s $ORACLE_HOME/bin/sqlplus /usr/local/bin
-sudo chown $USER:$USER /usr/local/bin/sqlplus
-sudo chmod 700 /usr/local/bin/sqlplus
-
 
 echo -e "\nPre-installation complete!\n"
