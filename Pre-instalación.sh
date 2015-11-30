@@ -143,9 +143,7 @@ source ~/.bashrc
 
 ### Launcher
 
-sudo echo '#!/bin/bash' > ~/sqlplus
-sudo echo 'exec $ORACLE_HOME/bin/sqlplus $1 $2 $3' >> ~/sqlplus
-sudo mv ~/sqlplus /usr/local/bin
+sudo ln -s $ORACLE_HOME/bin/sqlplus /usr/local/bin
 sudo chown $USER:$USER /usr/local/bin/sqlplus
 sudo chmod 700 /usr/local/bin/sqlplus
 
