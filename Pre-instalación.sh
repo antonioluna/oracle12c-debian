@@ -143,6 +143,7 @@ source ~/.bashrc
 
 ### Launcher
 
-sudo ln -s $ORACLE_HOME/bin/sqlplus /usr/local/bin
+sudo ln -s $ORACLE_HOME/bin/sqlplus /usr/local/bin/ 2> /dev/null
 
-echo -e "\nPre-installation complete!\n"
+echo -e "\nPre-installation complete!\nRemember to change the permissions of /usr/local/bin/sqlplus to 0700\n"
+
