@@ -11,7 +11,7 @@
 
 sudo dpkg --add-architecture i386
 sudo apt-get update
-sudo apt-get install sudo original-awk binutils libpcap-dev gcc g++ libc6 libc6-dev ksh libaio1 libstdc++-4.8-dev libXi6 libXtst6 make sysstat build-essential gcc-multilib lib32z1 lib32ncurses5 libstdc++5 rpm xauth
+sudo apt-get install sudo rlwrap original-awk binutils libpcap-dev gcc g++ libc6 libc6-dev ksh libaio1 libstdc++-4.8-dev libXi6 libXtst6 make sysstat build-essential gcc-multilib lib32z1 lib32ncurses5 libstdc++5 rpm xauth
 
 
 ### Create oinstall, oracle and dba group/user
@@ -135,9 +135,10 @@ echo "export ORACLE_BASE=$ORACLE_BASE" >> ~/.bashrc
 echo "export ORACLE_HOME=$ORACLE_HOME" >> ~/.bashrc
 echo "export ORACLE_OWNER=$ORACLE_OWNER" >> ~/.bashrc
 echo "export ORACLE_SID=orcl" >> ~/.bashrc
-echo "export ORACLE_HOME_LISTENER=$ORACLE_HOME/network/admin" >> ~/.bashrc
+echo "export ORACLE_HOME_LISTNER=$ORACLE_HOME/network/admin" >> ~/.bashrc
 echo "export TNS_ADMIN=$ORACLE_HOME/network/admin" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH="$ORACLE_HOME/lib"" >> ~/.bashrc
+echo "alias sqlplus='rlwrap sqlplus'" >> ~/.bashrc
 
 source ~/.bashrc
 
