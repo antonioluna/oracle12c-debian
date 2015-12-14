@@ -138,6 +138,7 @@ echo "export ORACLE_SID=orcl" >> ~/.bashrc
 echo "export ORACLE_HOME_LISTNER=$ORACLE_HOME/network/admin" >> ~/.bashrc
 echo "export TNS_ADMIN=$ORACLE_HOME/network/admin" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH="$ORACLE_HOME/lib"" >> ~/.bashrc
+echo "export NLS_LANG=SPANISH_SPAIN.AL32UTF8"
 echo "alias sqlplus='rlwrap sqlplus'" >> ~/.bashrc
 
 source ~/.bashrc
