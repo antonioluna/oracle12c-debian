@@ -6,6 +6,6 @@ After=network.target
 Type=forking
 User=Put here your oracle user
 ExecStart=$ORACLE_HOME/bin/dbstart $ORACLE_HOME #Modifies "$ORACLE_HOME" with the real directory
-
+ExecStop=$ORACLE_HOME/bin/dbshut $ORACLE_HOME
 [Install]
 WantedBy=multi-user.target
