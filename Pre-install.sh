@@ -126,7 +126,7 @@ echo -e "\nMake sure you enter your own database paths:\n\nBase: $oraclepath\n\n
 echo -e "Initializing Oracle Database 12c installer"
 sleep 5
 
-bash ./runInstaller -IgnoreSysPreReqs
+sudo -u oracle bash ./runInstaller -IgnoreSysPreReqs
 
 
 ### envs:
