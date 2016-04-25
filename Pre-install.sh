@@ -22,6 +22,11 @@ sudo adduser --system --ingroup oinstall --shell /bin/bash oracle
 sudo adduser oracle dba
 
 
+### Add user to oinstall and dba groups
+
+sudo gpasswd -a $USER oinstall
+sudo gpasswd -a $USER dba
+
 ### Symbolic links:
 
 sudo mkdir -p /usr/lib64
@@ -109,9 +114,9 @@ sudo mkdir -p "$oradatapath"
 
 ### Permissions change:
 
-sudo chown -R $USER:$USER $oraclepath
-sudo chown -R $USER:$USER $orainventorypath
-sudo chown -R $USER:$USER $oradatapath
+sudo chown -R oracle:dba $oraclepath
+sudo chown -R oracle:oinstall $orainventorypath
+sudo chown -R oracle:dba $oradatapath
 
 
 ### Oracle's propietary installer init:
@@ -121,23 +126,23 @@ echo -e "\nMake sure you enter your own database paths:\n\nBase: $oraclepath\n\n
 echo -e "Initializing Oracle Database 12c installer"
 sleep 5
 
-bash ./runInstaller -IgnoreSysPreReqs
+sudo -u oracle bash ./runInstaller -IgnoreSysPreReqs
 
 
 ### envs:
 
 ORACLE_BASE="$oraclepath"
 ORACLE_HOME="$oraclepath/product/12.1.0/dbhome_1"
-ORACLE_OWNER="$USER"
 
 echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/bin" >> ~/.bashrc
 echo "export ORACLE_BASE=$ORACLE_BASE" >> ~/.bashrc
 echo "export ORACLE_HOME=$ORACLE_HOME" >> ~/.bashrc
-echo "export ORACLE_OWNER=$ORACLE_OWNER" >> ~/.bashrc
+echo "export ORACLE_OWNER=oracle" >> ~/.bashrc
 echo "export ORACLE_SID=orcl" >> ~/.bashrc
 echo "export ORACLE_HOME_LISTNER=$ORACLE_HOME/network/admin" >> ~/.bashrc
 echo "export TNS_ADMIN=$ORACLE_HOME/network/admin" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH="$ORACLE_HOME/lib"" >> ~/.bashrc
+echo "export NLS_LANG=SPANISH_SPAIN.AL32UTF8" >> ~/.bashrc
 echo "alias sqlplus='rlwrap sqlplus'" >> ~/.bashrc
 
 source ~/.bashrc

@@ -1,0 +1,56 @@
+#!/bin/bash
+
+operador="$1"
+encendida=$(vboxmanage list runningvms | grep oracle-12c | awk '{printf $1}')
+
+if [[ -n "$2" ]]; then
+
+	case ${operador,,} in
+
+		"take")
+			if [[ "$encendida" == '"oracle-12c"' ]]; then 
+		
+				vboxmanage snapshot "oracle-12c" take "$2" --live
+			else
+
+				vboxmanage snapshot "oracle-12c" take "$2"
+			fi
+		;;
+
+		"go")
+			if [[ "$encendida" == '"oracle-12c"' ]]; then
+				echo -e "Powering of 'oracle-12c VM'"
+				vboxmanage controlvm "oracle-12c" poweroff
+				vboxmanage snapshot "oracle-12c" restore "$2"
+				echo -e "Restarting oracle-12c MV\n"
+				nohup vboxheadless -s "oracle-12c" >& /dev/null &
+			else
+				vboxmanage snapshot "oracle-12c" restore "$2"
+			fi
+		;;
+
+		"remove")
+
+			vboxmanage snapshot "oracle-12c" delete "$2"
+		;;
+
+		*)
+
+			echo -e "Los modos de uso son:\noracle-snaphot take <nombre snapshot>\noracle-snapshot list\noracle-snaphot go <nombre snapshot>\noracle-snaphot remove <nombre snapshot>"
+		;;
+	esac
+
+else
+
+	case ${operador,,} in
+
+		"list")
+
+			vboxmanage snapshot "oracle-12c" list --details
+		;;
+
+		*)
+			echo -e "Los modos de uso son:\noracle-snaphot take <nombre snapshot>\noracle-snapshot list\noracle-snaphot go <nombre snapshot>\noracle-snaphot remove <nombre snapshot>"
+		;;
+	esac
+fi
